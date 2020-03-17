@@ -12,3 +12,6 @@ Basic Spring Boot application with Docker
     
     docker start spring-boot-docker
     docker stop spring-boot-docker
+    
+ ## Test application
+    GET http://localhost:9090 -> Hello world
