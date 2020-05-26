@@ -1,6 +1,5 @@
 FROM openjdk:8-jdk-alpine
-MAINTAINER Alessio Fiore
-ADD target/spring-boot-docker*.jar spring-boot-docker.jar
-VOLUME /tmp
+LABEL maintainer="alessiofiore@gmail.com"
+COPY target/spring-boot-docker*.jar spring-boot-docker.jar
 EXPOSE 8080
-ENTRYPOINT java -jar /spring-boot-docker.jar
+ENTRYPOINT ["java","-jar","/spring-boot-docker.jar"]
