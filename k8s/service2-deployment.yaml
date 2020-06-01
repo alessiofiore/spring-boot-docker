@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service2-ws-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: service2-ws
+  template:
+    metadata:
+      labels:
+        component: service2-ws
+    spec:
+      containers:
+        - name: service2-ws
+          image: alessiofiore/spring-docker-k8s-service2:1.0.0
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 8080
