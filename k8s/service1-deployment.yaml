@@ -18,3 +18,8 @@ spec:
           imagePullPolicy: "Always"
           ports:
             - containerPort: 8080
+          env:
+            - name: SERVICE2-IP
+              value: service2-ws-cluster-ip-service
+            - name: SERVICE2-PORT
+              value: 8080

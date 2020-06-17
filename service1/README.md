@@ -6,27 +6,21 @@ Basic Spring Boot application with Docker
     
 ## Docker    
 
-### Build Docker image
+### Build image
     docker build -t alessiofiore/spring-docker-k8s-service1:1.0.0 .
     docker push alessiofiore/spring-docker-k8s-service1:1.0.0
+
+### Create network
+    docker network create spring-services-ntw
+    docker network ls
     
-### Run Docker container
-    docker run -p 9090:8080 --name service1 alessiofiore/spring-docker-k8s-service1:1.0.0
+### Create container
+    docker create -e SERVICE2-IP=service2 -e SERVICE2-PORT=8080 -p 9090:8080 --name service1 --network spring-services-ntw alessiofiore/spring-docker-k8s-service1:1.0.0 
     
+### Manage container
     docker start service1
     docker stop service1
+    docker logs -f service1
     
 ### Test application
-    GET http://localhost:9090 -> Hello world
-    
-    
-## Kubernates
-    kubectl apply -f service1-deployment.yaml
-    kubectl apply -f service1-service.yaml
-    kubectl apply -f ingress.yaml 
-    kubectl get ingress (Read Ingress address)
-    
-    
-    kubectl delete -n default deployment service1-ws-deployment
-    kubectl delete -n default service service1-ws-cluster-ip-service
-    kubectl delete -n default ingress ingress-service
+    GET http://localhost:9090 -> Hello World
