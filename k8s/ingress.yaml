@@ -9,11 +9,11 @@ spec:
   rules:
     - http:
         paths:
-          - path: /service1-ws/?(.*)
+          - path: /hello/?(.*)
             backend:
-              serviceName: service1-ws-cluster-ip-service
+              serviceName: hello-ws-cluster-ip-service
               servicePort: 8080
-          - path: /service2-ws/?(.*)
-              backend:
-                serviceName: service2-ws-cluster-ip-service
-                servicePort: 8080
+          - path: /person/?(.*)
+            backend:
+              serviceName: person-ws-cluster-ip-service
+              servicePort: 8080

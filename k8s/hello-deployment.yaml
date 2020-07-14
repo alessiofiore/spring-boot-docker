@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-ws-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: hello-ws
+  template:
+    metadata:
+      labels:
+        component: hello-ws
+    spec:
+      containers:
+        - name: hello-ws
+          image: alessiofiore/spring-k8s-hello-service:1.0.0
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PERSON_SERVICE-IP
+              value: person-ws-cluster-ip-service
+            - name: PERSON_SERVICE-PORT
+              value: '8080'

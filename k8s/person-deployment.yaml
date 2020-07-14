@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: person-ws-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: person-ws
+  template:
+    metadata:
+      labels:
+        component: person-ws
+    spec:
+      containers:
+        - name: person-ws
+          image: alessiofiore/spring-k8s-person-service:1.0.0
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MYSQL_ROOT_USERNAME_POST_DB
+              value: root
+            - name: MYSQL_ROOT_PASSWORD_POST_DB
+              valueFrom:
+                secretKeyRef:
+                  name: dbpassword
+                  key: MYSQL_ROOT_PASSWORD_PERSON
+            - name: MYSQL_HOST_POST_DB
+              value: mysql-person-cluster-ip-service
+            - name: MYSQL_PORT_POST_DB
+              value: '3306'
